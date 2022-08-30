@@ -1,111 +1,118 @@
-<?php include './inc/header.php' ?>
-<div class="container min-vh-100 text-center mt-5">
-	<?php
-	include "inc/connection.php";
 
-	// La catégorie a été choisie, je peux choisir la sous-catégorie
-	if (isset($_POST['recup_cat'])) {
-		$category = $_POST['recup_cat'];
+<?php
+include "inc/connection.php";
 
-		// $requete="SELECT * FROM category,sub_category WHERE nom_category='$category' AND category.id_category=sub_category.id_category ";
-		$requete = "SELECT * FROM sub_category,category WHERE nom_category='$category' AND category.id_category=sub_category.id_category";
+
+	// si je reviens de la page fiche , je réaffecte les valeurs de get dans post pour avoir la bonne base de variables post
+	if (isset($_GET['recup_id_cat'])&& isset($_GET['recup_id_subcat']))
+	{
+		$_POST['recup_id_cat']=$_GET['recup_id_cat'];
+		$_POST['recup_id_subcat']=$_GET['recup_id_subcat'];
+		$requete0 ="SELECT * FROM category,sub_category WHERE category.id_category=2 AND sub_category.id_subcategory=6 AND category.id_category=sub_category.id_category";
 		//requête pour tester la connexion
-		$query = $pdo->query($requete);
-		$resultat = $query->fetchAll();
+		$query0=$pdo->query($requete0);
+		$resultat0=$query0->fetchAll();
+			foreach($resultat0 as $key0 => $variable0)
+			{
+			$category_res=$resultat0[$key0]['nom_category'];
+			$subcategory_res=$resultat0[$key0]['nom_subcategory'];
+			
+			$_POST['recup_cat_sec']=$category_res;
+			$_POST['recup_subcat']=$subcategory_res;
+						
+			}
+	}
+	
+		
+		// La catégorie a été choisie, je peux choisir la sous-catégorie
+		if (isset($_POST['recup_cat']))
+		{
+		$category=$_POST['recup_cat'];
+		$requete="SELECT * FROM sub_category,category WHERE nom_category='$category' AND category.id_category=sub_category.id_category";
+		//requête pour tester la connexion
+		$query=$pdo->query($requete);
+		$resultat=$query->fetchAll();
 		//afficher le résultat dans un tableau
 		echo "<form action='landing.php' method='post'>";
-		echo "<label  class ='mb-3'>Choisir une catégorie</label><br/>";
-		echo "<div class='d-flex justify-content-center'>";
-		echo "<select name='recup_subcat' class ='form-select me-4 w-50' aria-label='Default select example'>";
-		foreach ($resultat as $key => $variable) {
-			$subcategory = $resultat[$key]['id_subcategory'];
-			$id_category = $resultat[$key]['id_category'];
+		echo "<label>Choisir une sous-catégorie</label><br/>";
+		echo "<select name='recup_subcat'>";
+			foreach($resultat as $key => $variable)
+			{
+			$subcategory=$resultat[$key]['id_subcategory'];
+			$id_category=$resultat[$key]['id_category'];
 			echo "<option>";
 			echo $resultat[$key]['nom_subcategory'];
 			echo "</option>";
-		}
-		echo "</select>";
+			}
+		echo "</select>";	
 		echo "<input type='hidden' name='recup_id_subcat' value='$subcategory'>";
 		echo "<input type='hidden' name='recup_cat_sec' value='$category'>";
 		echo "<input type='hidden' name='recup_id_cat_sec' value='$id_category'>";
-		echo "<button type='submit' class='btn btn-dark'>Go</button>";
-		echo "</div>";
-		echo "</form>";
-	}
+		echo "<button type='submit'>Go</button>";
+		echo "</form>";	
+		}
 
-	// La catégorie n'a pas été choisie,je choisis donc la catégorie
-	else {
-		echo "<form action='landing.php' method='post'>";
-		$requete2 = "SELECT * FROM category";
+		// La catégorie n'a pas été choisie,je choisis donc la catégorie
+		else 
+		{
+		echo "<form action='landing.php' method='post'>";	
+		$requete2="SELECT * FROM category";
 		//requête pour tester la connexion
-		$query2 = $pdo->query($requete2);
-		$resultat2 = $query2->fetchAll();
+		$query2=$pdo->query($requete2);
+		$resultat2=$query2->fetchAll();
 		//afficher le résultat dans un tableau
-		echo "<h1>Choisir une sous-catégorie</h1><br/>";
-		echo "<div class='d-flex justify-content-center'>";
-		echo "<select name='recup_cat' class ='form-select me-4 w-50' aria-label='Default select example'>";
-		foreach ($resultat2 as $key2 => $variable2) {
+		echo "<label>Choisir une catégorie</label><br/>";
+		echo "<select name='recup_cat'>";
+			foreach($resultat2 as $key2 => $variable2)
+			{
+			$id_category=$resultat2[$key2]['id_category'];
 			echo "<option>";
 			echo $resultat2[$key2]['nom_category'];
 			echo "</option>";
-		}
-		echo "</select>";
-		echo "<button type='submit' class ='btn btn-dark'>Go</button>";
-		echo "</div>";
-		echo "</form>";
-	}
-
-	echo "<br/>";
-	// la sous-catégorie est choisie, je peux afficher les éléments concernés
-	if (isset($_POST['recup_id_subcat'])) {
-		$id_subcat = $_POST['recup_id_subcat'];
-		echo "<br/>";
-		echo "<div class='d-flex justify-content-center'>";
-		echo "<h5 class='me-3'>";
-		echo "Dans la catégorie: ";
-		echo "<p class = 'badge bg-warning text-dark rounded-pill'>";
-		echo $_POST['recup_cat_sec'];
-		echo "</p>";
-		echo '</h5>';
-		echo "<h5>";
-		echo "Dans la sous-catégorie: ";
-		echo "<p class = 'badge bg-info text-dark text-start rounded-pill'>";
-		echo  $_POST['recup_subcat'];
-		echo "</p>";
-		echo '</h5>';
-		echo "</div>";
-		echo "<br/>";
-		echo "<br/>";
-		$requete3 = "SELECT * FROM objets,category,sub_category WHERE sub_category.id_subcategory=$id_subcat AND sub_category.id_subcategory=objets.id_subcategory AND category.id_category=objets.id_category_objet";
-		//requête pour tester la connexion
-		$query3 = $pdo->query($requete3);
-		$resultat3 = $query3->fetchAll();
-		//afficher le résultat dans un tableau
-		?>
-		<div class="container">	
-			<div class="row row-cols-4">
-		<?php
-			foreach ($resultat3 as $key3 => $variable3) {
-				$category_res = $resultat3[$key3]['nom_category'];
-				$subcategory_res = $resultat3[$key3]['nom_subcategory'];
-				$photo = $resultat3[$key3]['photo_objet'];
-				echo "<div class='col mb-3'>";
-				echo "<div class='card ' style='width: 18rem height:10rem'>";
-				echo "<img src='assets/thumbs/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='card-img-top border-bottom border-dark'>";
-				echo "<div class='card-body'>";
-				echo "<h5 class='card-title'>";
-				echo $resultat3[$key3]['model_objet'];
-				echo "</h5>";
-				echo "<a href='' class='btn btn-dark mt-1'>";
-				echo "Add to cart";
-				echo '</a>';
-				echo "</div>";
-				echo "</div>";
-				echo "</div>";
 			}
+		echo "</select>";	
+		echo "<button type='submit'>Go</button>";
+		echo "</form>";
 		}
-		?>
-		</div>
-	</div>
-</div>
-<?php include './inc/footer.php' ?>
+	
+		echo "<br/>";
+		
+		// la sous-catégorie est choisie, je peux afficher les éléments concernés
+		if (isset($_POST['recup_id_subcat']))
+		{	
+
+		$id_subcat=$_POST['recup_id_subcat'];
+		echo "<br/>";
+		echo "Dans la catégorie :".$_POST['recup_cat_sec'];
+		echo "<br/>";
+		echo "Dans la sous-catégorie :".$_POST['recup_subcat'];
+		echo "<br/>";echo "<br/>";
+		$requete3 ="SELECT * FROM objets,category,sub_category WHERE sub_category.id_subcategory=$id_subcat AND sub_category.id_subcategory=objets.id_subcategory AND category.id_category=objets.id_category_objet";
+		//requête pour tester la connexion
+		$query3=$pdo->query($requete3);
+		$resultat3=$query3->fetchAll();
+		//afficher le résultat dans un tableau
+
+			foreach($resultat3 as $key3 => $variable3)
+			{
+			$category_res=$resultat3[$key3]['nom_category'];
+			$subcategory_res=$resultat3[$key3]['nom_subcategory'];
+			$id_objet=$resultat3[$key3]['id_objet'];
+			$photo=$resultat3[$key3]['photo_objet'];
+			echo $resultat3[$key3]['model_objet'];
+			echo "<br/>";
+			echo "<img src='assets/thumbs/$category_res/$subcategory_res/$photo.png' alt='$photo.png'";
+			echo "<br/>";echo "<br/>";
+			echo "<a href='single.php?id_objet=$id_objet'>Emprunter</a>";
+			echo "<br />";
+			echo "<br/>";
+			echo "<br/>";
+			}
+	
+		}
+	
+	
+	
+	?>
+	
+
