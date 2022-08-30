@@ -22,7 +22,7 @@
             <label for="exampleInputPassword1" class="form-label">mot de pass</label>
             <input type="password" class="form-control" id="exampleInputPassword1">
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-dark">Submit</button>
     </form>
 </div>
 <?php include '../inc/footer.php' ?>

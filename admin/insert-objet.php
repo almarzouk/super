@@ -19,19 +19,15 @@
             <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">mot de pass</label>
-            <select>
-                <option>accessoires</option>
-                <option>lumieres</option>
-                <option>photos_appareils</option>
-                <option>accessoires</option>
+            <label for="exampleInputEmail1" class="form-label">Category</label>
+            <select class="form-select mb-4" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
             </select>
         </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">mot de pass</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-dark">Valider</button>
     </form>
 </div>
 <?php include '../inc/footer.php' ?>

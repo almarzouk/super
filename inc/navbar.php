@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="../index.php">Super</a>
+        <a class="navbar-brand" href="http://localhost/super-1/index.php">Super</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -17,7 +17,10 @@
                     <a class="nav-link  me-4" aria-current="page" href="#">les emprunt en cours</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  me-4" aria-current="page" href="../admin/insert-objet.php">insert objet</a>
+                    <a class="nav-link  me-4" aria-current="page" href="./admin/insert-objet.php">insert objet</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  me-4" aria-current="page" href="../admin/insert-user.php">insert user</a>
                 </li>
             </ul>
         </div>
