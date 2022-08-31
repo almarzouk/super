@@ -57,7 +57,8 @@
 
 	echo "<br/>";
 	// la sous-catégorie est choisie, je peux afficher les éléments concernés
-	if (isset($_POST['recup_id_subcat'])) {
+	if (isset($_POST['recup_id_subcat'])) 
+	{
 		$id_subcat = $_POST['recup_id_subcat'];
 		echo "<div class='d-flex justify-content-center'>";
 		echo "<h5 class='me-3'>";
@@ -86,6 +87,7 @@
 				$category_res = $resultat3[$key3]['nom_category'];
 				$subcategory_res = $resultat3[$key3]['nom_subcategory'];
 				$photo = $resultat3[$key3]['photo_objet'];
+				$id_objet=$resultat3[$key3]['id_objet'];
 				echo "<div class='col mb-3'>";
 				echo "<div class='card ' style='width: 18rem;'>";
 				echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid border-bottom border-dark'>";
@@ -93,17 +95,57 @@
 				echo "<h5 class='card-title'>";
 				echo $resultat3[$key3]['model_objet'];
 				echo "</h5>";
-				echo "<a href='' class='btn btn-dark mt-1'>";
-				echo "Add to cart";
-				echo '</a>';
-				echo "<a href='' class='btn btn-secondary mt-1 ms-2'>";
-				echo "View";
+				echo "<a href='single.php?id_objet=$id_objet' class='btn btn-secondary mt-1 ms-2'>";
+				echo "Voir la fiche";
 				echo '</a>';
 				echo "</div>";
 				echo "</div>";
 				echo "</div>";
 			}
-		}
+	}
+	
+	else
+	{
+		
+		echo "<div class='d-flex justify-content-center'>";
+		echo "<h5 class='me-3'>";
+		echo "<p class = 'badge bg-warning text-dark rounded-pill'>";
+		echo "</p>";
+		echo '</h5>';
+		echo "<h5>";
+		echo "<p class = 'badge bg-info text-dark text-start rounded-pill'>";
+		echo "</p>";
+		echo '</h5>';
+		echo "</div>";
+		$requete4 = "SELECT * FROM objets,category,sub_category where objets.id_category_objet=category.id_category AND objets.id_subcategory=sub_category.id_subcategory;";
+		//requête pour tester la connexion
+		$query4 = $pdo->query($requete4);
+		$resultat4 = $query4->fetchAll();
+		//afficher le résultat dans un tableau
+		?>
+		<div class="container">	
+			<div class="row row-cols-4 justify-content-center">
+		<?php
+			foreach ($resultat4 as $key4 => $variable4) {
+				$category_res = $resultat4[$key4]['nom_category'];
+				$subcategory_res = $resultat4[$key4]['nom_subcategory'];
+				$photo = $resultat4[$key4]['photo_objet'];
+				$id_objet=$resultat4[$key4]['id_objet'];
+				echo "<div class='col mb-3'>";
+				echo "<div class='card ' style='width: 18rem;'>";
+				echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid border-bottom border-dark'>";
+				echo "<div class='card-body'>";
+				echo "<h5 class='card-title'>";
+				echo $resultat4[$key4]['model_objet'];
+				echo "</h5>";
+				echo "<a href='single.php?id_objet=$id_objet' class='btn btn-secondary mt-1 ms-2'>";
+				echo "Voir la fiche";
+				echo '</a>';
+				echo "</div>";
+				echo "</div>";
+				echo "</div>";
+			}
+	}
 		?>
 		</div>
 	</div>
