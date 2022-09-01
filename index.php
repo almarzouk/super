@@ -1,6 +1,9 @@
-<?php include './inc/header.php' ?>
+<?php include './inc/header.php';
+include './navbar.php';
 
-<div class="container text-center">
+?>
+
+<div class="container text-center min-vh-100">
     <h3 class="text-center m-5">
         Welcome to super E-commerce, votre site de location de materiel photo, vidéo, et accessoires.
     </h3>

@@ -7,7 +7,7 @@ body {
   max-width: 600px;
 }
 .the-h {
-  min-height: 82.9vh !important;
+  min-height: 100vh !important;
 }
 @media (max-width: 991px) {
   .col-12 {

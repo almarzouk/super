@@ -75,5 +75,3 @@ $stmt=$pdo->prepare('INSERT INTO `emprunts`( `id_emprunteur`, `id_objet`, `date_
 
 
 }
-
-?>

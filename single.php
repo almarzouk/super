@@ -1,6 +1,7 @@
 <?php include './inc/header.php' ?>
+<?php include 'navbar.php' ?>
 
-<div class="container the-h">
+<div class="container min-vh-100">
 	<?php include "inc/connection.php";
 	// La catégorie a été choisie, je peux choisir la sous-catégorie
 	$id_objet = $_GET['id_objet'];
@@ -23,7 +24,7 @@
 		$photo = $resultat[$key]['photo_objet'];
 		?>
 		<!--  -->
-		<div class="container mt-5 border border-2 rounded">
+		<div class="container mt-5 border border-3 rounded">
 			<div class="row align-items-center mt-0 justify-content-center">
 				<div class="col-img border-bottom col-12 col-lg-6 d-flex justify-content-center align-items-center mb-5">
 					<img src='assets/thumbs/<?= $category_res ?>/<?= $subcategory_res ?>/<?= $photo . ".png" ?>' alt=<?= $photo . ".png" ?> class="w-75 h-75 img-fluid">

@@ -1,4 +1,5 @@
 <?php include './inc/header.php' ?>
+<?php include 'navbar.php' ?>
 <div class="container min-vh-100 text-center mt-5">
 	<?php
 	include "inc/connection.php";
@@ -149,7 +150,7 @@
 						$id_objet = $resultat4[$key4]['id_objet'];
 						$quantite = $resultat4[$key4]['quantite'];
 						echo "<div class='col mb-3'>";
-						echo "<div class='card bg-light bg-gradient text-dark border border-3' style='width: 18rem;'>";
+						echo "<div class='card bg-light bg-gradient text-dark border border-2' style='width: 18rem;'>";
 						echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid  border-bottom'>";
 						echo "<div class='card-body'>";
 						echo "<h5 class='card-title'>";

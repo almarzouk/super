@@ -1,6 +1,7 @@
 <?php include '../inc/header.php' ?>
-<div class="container ">
-    <form class="mb-5 w-50 p-5 m-auto">
+<?php include '../navbar.php' ?>
+<div class="container min-vh-100">
+    <form class="mb-5 w-50 p-5 m-auto ">
         <h3>insert objet</h3>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Marque</label>

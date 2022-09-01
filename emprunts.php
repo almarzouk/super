@@ -1,4 +1,5 @@
 <?php include './inc/header.php' ?>
+<?php include './navbar.php' ?>
 <?php include "inc/connection.php";
 if (isset($_GET['option_page'])) {
 	$option_page = $_GET['option_page'];
@@ -6,7 +7,7 @@ if (isset($_GET['option_page'])) {
 	$option_page = 0;
 }
 ?>
-<div class="container mt-5">
+<div class="container mt-5 min-vh-100">
 	<?php
 	if ($option_page == 0) {
 		echo "<h3>Historique</h3>";
