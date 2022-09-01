@@ -21,3 +21,17 @@ img {
 .form-check-input {
   cursor: pointer !important;
 }
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot-1 {
+  height: 10px;
+  width: 10px;
+  background-color: #2b8c44;
+  border-radius: 50%;
+  display: inline-block;
+}
