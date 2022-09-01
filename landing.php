@@ -88,9 +88,9 @@
 					$photo = $resultat3[$key3]['photo_objet'];
 					$id_objet = $resultat3[$key3]['id_objet'];
 					$quantite = $resultat3[$key3]['quantite'];
-					echo "<div class='col mb-3'>";
-					echo "<div class='card ' style='width: 18rem;'>";
-					echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid border-bottom border-dark'>";
+					echo "<div class='col mb-3 '>";
+					echo "<div class='card' style='width: 18rem;'>";
+					echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid  border-bottom border'>";
 					echo "<div class='card-body'>";
 					echo "<h5 class='card-title'>";
 					echo $resultat3[$key3]['model_objet'];
@@ -149,8 +149,8 @@
 						$id_objet = $resultat4[$key4]['id_objet'];
 						$quantite = $resultat4[$key4]['quantite'];
 						echo "<div class='col mb-3'>";
-						echo "<div class='card ' style='width: 18rem;'>";
-						echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid border-bottom border-dark'>";
+						echo "<div class='card bg-light bg-gradient text-dark border border-3' style='width: 18rem;'>";
+						echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid  border-bottom'>";
 						echo "<div class='card-body'>";
 						echo "<h5 class='card-title'>";
 						echo $resultat4[$key4]['model_objet'];
@@ -173,7 +173,7 @@
 							echo "</span>";
 							echo "Non disponibe";
 							echo "</div>";
-							echo "<button disabled href='single.php?id_objet=$id_objet' class='btn btn-secondary mt-2 d-block w-50 m-auto'>";
+							echo "<button disabled href='single.php?id_objet=$id_objet' class='btn btn-dark mt-2 d-block w-50 m-auto'>";
 							echo "Voir la fiche";
 							echo '</button>';
 						}
