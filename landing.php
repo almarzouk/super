@@ -140,7 +140,7 @@
 				//afficher le résultat dans un tableau
 				?>
 				<div class="container">
-					<div class="row row-cols-4 justify-content-center">
+					<div class="row row-cols-auto justify-content-center">
 					<?php
 					foreach ($resultat4 as $key4 => $variable4) {
 						$category_res = $resultat4[$key4]['nom_category'];
@@ -189,7 +189,6 @@
 							echo "<div class='d-flex justify-content-center align-items-center'>";
 							echo "<span class='dot-1 me-2'>";
 							echo "</span>";
-
 							echo "$quantitereelle disponible$pluriel";
 							echo "</div>";
 							echo "<a href='single.php?id_objet=$id_objet' class='btn btn-dark mt-2 d-block w-50 m-auto'>";
