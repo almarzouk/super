@@ -1,4 +1,40 @@
-<?php include './inc/header.php' ?>
+<?php
+session_start(); 
+// ouverture de session
+// si pas de session - retour a l'index 
+if (!$_SESSION['nom_user'])
+{
+header('location: index.php');	
+}
+
+// si session ok, je vois le contenu
+else
+{
+	include './inc/header.php' ;
+	include './inc/navbar.php' ;
+	
+	//je rajoute une condition
+	// si je suis admin, je vois le contenu destiné à l'admin
+	
+	?>
+	
+	
+	<?php 
+	
+	if ($_SESSION['auth']==1)
+	{
+		echo "<h3>Module d'administration</h3>";
+	}
+	else
+	{
+		echo "<h3>Module Emprunteur</h3>";
+	
+	
+	
+	// si je suis emprunteur, je vois la liste des produits a emprunter
+?>
+
+
 <div class="container min-vh-100 text-center mt-5">
 	<?php
 	include "inc/connection.php";
@@ -88,9 +124,9 @@
 					$photo = $resultat3[$key3]['photo_objet'];
 					$id_objet = $resultat3[$key3]['id_objet'];
 					$quantite = $resultat3[$key3]['quantite'];
-					echo "<div class='col mb-3 '>";
-					echo "<div class='card' style='width: 18rem;'>";
-					echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid  border-bottom border'>";
+					echo "<div class='col mb-3'>";
+					echo "<div class='card ' style='width: 18rem;'>";
+					echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid border-bottom border-dark'>";
 					echo "<div class='card-body'>";
 					echo "<h5 class='card-title'>";
 					echo $resultat3[$key3]['model_objet'];
@@ -140,7 +176,7 @@
 				//afficher le résultat dans un tableau
 				?>
 				<div class="container">
-					<div class="row row-cols-auto justify-content-center">
+					<div class="row row-cols-4 justify-content-center">
 					<?php
 					foreach ($resultat4 as $key4 => $variable4) {
 						$category_res = $resultat4[$key4]['nom_category'];
@@ -149,8 +185,8 @@
 						$id_objet = $resultat4[$key4]['id_objet'];
 						$quantite = $resultat4[$key4]['quantite'];
 						echo "<div class='col mb-3'>";
-						echo "<div class='card bg-light bg-gradient text-dark border border-3' style='width: 18rem;'>";
-						echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid  border-bottom'>";
+						echo "<div class='card ' style='width: 18rem;'>";
+						echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid border-bottom border-dark'>";
 						echo "<div class='card-body'>";
 						echo "<h5 class='card-title'>";
 						echo $resultat4[$key4]['model_objet'];
@@ -173,7 +209,7 @@
 							echo "</span>";
 							echo "Non disponibe";
 							echo "</div>";
-							echo "<button disabled href='single.php?id_objet=$id_objet' class='btn btn-dark mt-2 d-block w-50 m-auto'>";
+							echo "<button disabled href='single.php?id_objet=$id_objet' class='btn btn-secondary mt-2 d-block w-50 m-auto'>";
 							echo "Voir la fiche";
 							echo '</button>';
 						}
@@ -189,6 +225,7 @@
 							echo "<div class='d-flex justify-content-center align-items-center'>";
 							echo "<span class='dot-1 me-2'>";
 							echo "</span>";
+
 							echo "$quantitereelle disponible$pluriel";
 							echo "</div>";
 							echo "<a href='single.php?id_objet=$id_objet' class='btn btn-dark mt-2 d-block w-50 m-auto'>";
@@ -207,4 +244,7 @@
 					</div>
 				</div>
 			</div>
+			<?php } // fermeture de données destinées à l'emprunteur ?>
 			<?php include './inc/footer.php' ?>
+			
+<?php } // fermeture de session ?>

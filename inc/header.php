@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/style.css">
 
     <style>
         <?php include './assets/style/style.css' ?>
@@ -16,4 +16,15 @@
 </head>
 
 <body>
-    <?php include 'navbar.php' ?>
+    <?php
+$rep_default = "/super";
+$url_standard = "http://" . $_SERVER['HTTP_HOST'] . $rep_default;
+// echo $url_standard;
+
+	
+	// include $url_standard."inc/navbar.php" 
+	
+	
+	
+	
+	?>
