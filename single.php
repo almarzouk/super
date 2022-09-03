@@ -1,5 +1,30 @@
-<?php include './inc/header.php' ?>
-<?php include 'navbar.php' ?>
+<?php
+session_start(); 
+// ouverture de session
+// si pas de session - retour a l'index 
+    if (!$_SESSION['nom_user'])
+        {
+        header("location:$url_standard/index.php");	
+        }
+
+    // si session ok, je vois le contenu
+    else
+        {
+			
+				if (($_SESSION['auth']==1)OR($_SESSION['auth']==1))
+	{
+	header("location:$url_standard/landing.php");	
+	}
+	else
+	{
+		include 'inc/header.php' ;
+		include 'inc/navbar.php' ;
+			
+		echo "<h3>Module emprunteur</h3>";
+		echo "<h4>Choix d'un objet</h4>";
+		
+            
+            ?>
 
 <div class="container min-vh-100">
 	<?php include "inc/connection.php";
@@ -21,6 +46,7 @@
 		$modele = $resultat[$key]['model_objet'];
 		$marque = $resultat[$key]['marque_objet'];
 		$description = $resultat[$key]['description_objet'];
+		$quantite = $resultat[$key]['quantite'];
 		$photo = $resultat[$key]['photo_objet'];
 		?>
 		<!--  -->
@@ -33,11 +59,46 @@
 					<p class="m-0 mb-2"><strong>Marque:</strong> <?= $resultat[$key]['marque_objet'] ?></p>
 					<p class="m-0 mb-2"><strong>Modèle:</strong> <?= $resultat[$key]['model_objet'] ?></p>
 					<p class="m-0 mb-5"><strong>Description:</strong> <?= $resultat[$key]['description_objet'] ?></p>
+					<?php
+					// gestion de l'affichage de la quantité et de la disponibilité
+					//calcul de la quantité réelle
+					$requete_compte = "select * from objets,emprunts where objets.id_objet=$id_objet AND objets.id_objet=emprunts.id_objet;";
+					$query5 = $pdo->query($requete_compte);
+					$resultat5 = $query5->fetchAll();
+					$count = $query5->rowCount();
+					$quantitereelle = $quantite - $count;
+
+					if ($quantitereelle == 0) 
+					{
+					echo "<div class='d-flex justify-content-center align-items-center'>";
+					echo "<span class='dot me-2'>";
+					echo "</span>";
+					echo "Non disponibe";
+					echo "</div>";
+										}
+
+							if ($quantitereelle > 0) 
+							{
+								if ($quantitereelle == 1) {$pluriel = '';}
+								if ($quantitereelle > 1) {$pluriel = 's';}
+
+								echo "<div class='d-flex justify-content-center align-items-center'>";
+								echo "<span class='dot-1 me-2'>";
+								echo "</span>";
+								echo "$quantitereelle disponible$pluriel";
+								echo "</div>";
+								
+							}
+							// fin gestion quantité
+					?>
 					<div class="form-check form-switch  mb-3">
+						<form action="admin/insert-emprunt.php" method="post">
 						<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name='confirm_emprunt'>
+						<input type="hidden" name="id_objet" value="<?php echo "$id_objet";?>">
 						<label class="form-check-label" for="flexSwitchCheckDefault">cocher pour confirmer</label>
 					</div>
-					<button class="btn disBtn btn-dark mb-3 d-block" disabled href='<?= "admin/emprunt.php?id_objet=$id_objet" ?>'>Emprunter ce matériel</button>
+					<button class="btn disBtn btn-dark mb-3 d-block" type="submit" disabled'>Emprunter ce matériel</button>
+						</form>
 					<a class="btn btn-dark" href='<?= "landing.php?recup_id_cat=$id_category&recup_id_subcat=$id_subcategory" ?>'>Revenir à la liste</a>
 				</div>
 			</div>
@@ -60,3 +121,8 @@
 	})
 </script>
 <?php include './inc/footer.php' ?>
+
+
+	<?php } // fin de session admin
+
+} // fin de session	?>
