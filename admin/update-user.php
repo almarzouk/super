@@ -1,6 +1,35 @@
-<?php include '../inc/header.php' ?>
-<?php include '../navbar.php' ?>
-<div class="container min-vh-100 ">
+<?php
+session_start(); 
+
+// ouverture de session
+// si pas de session - retour a l'index 
+if (!$_SESSION['nom_user'])
+{
+header('location:../index.php');	
+}
+
+// si session ok, je vois le contenu
+else
+{
+	include '../inc/header.php' ;
+	include '../inc/navbar.php' ;
+	
+	//je rajoute une condition
+	// si je suis admin, je vois le contenu destiné à l'admin
+	
+
+	if ($_SESSION['auth']!=1)
+	{
+	header("location:$url_standard/landing.php");	
+	}
+	else
+	{
+		echo "<h3>Module d'administration</h3>";
+		echo "<h4>Modification des données utilisateur</h4>";
+	
+
+        ?>
+<div class="container ">
     <form class="mb-5 w-50 p-5 m-auto">
         <h3>Update info</h3>
         <div class="mb-3">
@@ -26,4 +55,11 @@
         <button type="submit" class="btn btn-dark">Update</button>
     </form>
 </div>
-<?php include '../inc/footer.php' ?>
+<?php 
+    }//Fermeture session admin
+?>
+<?php include '../inc/footer.php';
+
+ }//Fermeture session 
+ 
+ ?>
