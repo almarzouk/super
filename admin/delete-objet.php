@@ -1,69 +1,70 @@
 <?php
-session_start ();
+session_start();
 include('../inc/connection.php');
 
-        $id = $_GET['id'];
-        //echo $id;
+// ouverture de session
+// si pas de session - retour a l'index 
+if (!$_SESSION['nom_user']) {
+	header('location: ../index.php');
+}
 
-        //Requete pour tester la connexion
-            $query = $pdo->query("SELECT * FROM objets,category,sub_category WHERE id_objet=$id AND objets.id_category_objet=category.id_category AND sub_category.id_subcategory=objets.id_subcategory");
-            $resultat = $query->fetchAll ();
+// si session ok, je vois le contenu
+else {
+	if ($_SESSION['auth'] != 1) {
+		header("location:../landing.php");
+	} else {
+		include '../inc/header.php';
+		include '../inc/navbar.php';
 
-    echo"<div id='bloc1'>";
-        //Afficher les résultats dans un tableau
-            foreach ($resultat as $key =>$variable)
-                //$id = $resultat[$key]['id_objet'];
-                
-                $marque = $resultat[$key]['marque_objet'];
-                $model = $resultat[$key]['model_objet'];
-                $photo = $resultat[$key]['photo_objet'];
-                $description = $resultat[$key]['description_objet'];
-                $path = "../assets/images/";
-                $nom = $resultat[$key]['nom_category'];
-                $nomsub = $resultat[$key]['nom_subcategory'];
-                
-                    {
-                        echo"<tr>";
-                        echo"<p><b>Etes vous certain de vouloir effacer ces données?</b></br></p>";
-                            //echo"<td>" .$resultat[$key]['id_objet']. "</td></br>";                     
-                            echo"<td>$marque</td></br>";
-                            echo"<td>$model</td><br>";
-                            echo"<td><img src='$path$nom/$nomsub/$photo.jpg'></td></br>"; 
-                            echo"<td>" .$resultat[$key]['description_objet']. "</td><br>";
-                           
-                                               
-                            echo"<td><a href='delete-action-objet.php?id=$id'><input type='submit' name='delete' value='Delete' id='button'></a></td>";   
-                        echo"</tr>";                
-                    }
-    echo"</div>";
-        //Fermeture de la connexion 
-        $pdo = null;
+
+		//je rajoute une condition
+		// si je suis admin, je vois le contenu destiné à l'admin
+
+		//Requete pour tester la connexion
+		$query = $pdo->query("SELECT * FROM `objets`");
+		$resultat = $query->fetchAll();
 ?>
 
-<link rel="stylesheet" href="assets/css/style.css" type="text/css">
-    <style>
-body{
-background-color:whitesmoke ;
-text-align: center;
+		<div class="container min-vh-100">
+			<?= "<h3>Module d'administration</h3>"; ?>
+			<?= "<h4>Supprimer un objet</h4>"; ?>
+			<div class="container mt-5 m-0 p-0">
+				<table class="table table-dark table-striped">
+					<th>ID Objet</th>
+					<th>Marque</th>
+					<th>Modèle</th>
+					<th>ID CAT</th>
+					<th>ID SUBCAT</th>
+					<th>ACTION</th>
 
-}
-#bloc1{
-    border:5px solid black;
-    position:absolute;
-    top:25%;
-    left:40%; 
-    width:300px;
-    padding:45px;
-   
-
-}
-         img{
-            width:200px;
-            height:200px;
-            border: 2px solid white;
-            border-radius: 20px;
-            }
+					<?php
+					//Afficher les résultats dans un tableau
+					foreach ($resultat as $key => $variable) {
+						echo "<tr>";
+						$id = $resultat[$key]['id_objet'];
 
 
 
-    </style>
+						echo ("<td>" . $resultat[$key]['id_objet'] . "</td>");
+						echo ("<td>" . $resultat[$key]['marque_objet'] . "</td>");
+						echo ("<td>" . $resultat[$key]['model_objet'] . "</td>");
+						echo ("<td>" . $resultat[$key]['id_category_objet'] . "</td>");
+						echo ("<td>" . $resultat[$key]['id_subcategory'] . "</td>");
+						echo ("<td><a class='btn btn-danger' href='delete-objet-verif.php?id_objet=$id'>Supprimer</a></td>");
+						echo "</tr>";
+					}
+					?>
+
+				</table>
+
+			</div>
+		</div>
+<?php
+		//Fermeture de la connexion 
+		$pdo = null;
+
+		include '../inc/footer.php';
+	} //fermeture session admin
+
+} //fermeture session 
+?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 31 août 2022 à 14:55
+-- Généré le : ven. 02 sep. 2022 à 09:21
 -- Version du serveur : 8.0.27
 -- Version de PHP : 8.0.13
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `emprunts` (
   `encours` int NOT NULL,
   `date_retour_reel` date NOT NULL,
   PRIMARY KEY (`id_emprunt`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `emprunts`
@@ -69,10 +69,18 @@ CREATE TABLE IF NOT EXISTS `emprunts` (
 INSERT INTO `emprunts` (`id_emprunt`, `id_emprunteur`, `id_objet`, `date_emprunt`, `date_restitution`, `encours`, `date_retour_reel`) VALUES
 (1, 1, 33, '2022-08-31', '2022-09-07', 0, '2022-08-31'),
 (2, 1, 33, '2022-08-31', '2022-09-07', 1, '2022-08-31'),
-(3, 1, 30, '2022-08-12', '2022-08-19', 1, '2022-08-31'),
+(3, 2, 30, '2022-08-12', '2022-08-19', 0, '2022-09-01'),
 (4, 1, 48, '2022-08-31', '2022-09-07', 1, '2022-08-31'),
-(5, 1, 5, '2022-08-31', '2022-09-07', 1, '0000-00-00'),
-(6, 1, 11, '2022-08-31', '2022-09-07', 1, '0000-00-00');
+(5, 1, 5, '2022-08-31', '2022-09-07', 0, '2022-09-01'),
+(6, 1, 11, '2022-08-31', '2022-09-07', 1, '0000-00-00'),
+(7, 1, 18, '2022-09-01', '2022-09-08', 1, '0000-00-00'),
+(8, 1, 3, '2022-09-01', '2022-09-08', 1, '0000-00-00'),
+(9, 1, 27, '2022-09-01', '2022-09-08', 1, '0000-00-00'),
+(10, 1, 7, '2022-09-01', '2022-09-08', 1, '0000-00-00'),
+(11, 1, 12, '2022-09-01', '2022-09-08', 1, '0000-00-00'),
+(12, 2, 6, '2022-09-01', '2022-09-08', 1, '0000-00-00'),
+(13, 2, 6, '2022-09-01', '2022-09-08', 0, '2022-09-01'),
+(14, 2, 3, '2022-09-01', '2022-09-08', 0, '2022-09-01');
 
 -- --------------------------------------------------------
 
@@ -198,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `auth_user` int NOT NULL,
   `type_user` int NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `users`
@@ -206,7 +214,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id_user`, `nom_user`, `prenom_user`, `adresse_user`, `mail_user`, `pass_user`, `auth_user`, `type_user`) VALUES
 (1, 'admin', 'admin', 'admin', 'leserpat@hotmail.com', 'pass', 1, 1),
-(2, 'eleve', 'eleve', 'eleve', 'eleve', 'eleve', 0, 0);
+(2, 'eleve', 'eleve', 'eleve', 'eleve@eleve.com', 'eleve', 0, 0),
+(5, 'grasseau', 'amandine', '4 les marchands 24700 Le pizou', 'amandinegr9@gmail.com', 'amandine', 1, 1),
+(6, 'almarzouk', 'jumaa', '2 lotis la croix lanauve, 16000 Angoulême', 'jumaa.almarzouk@gmail.com', 'jumaa', 1, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
