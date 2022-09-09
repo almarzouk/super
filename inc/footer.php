@@ -4,8 +4,7 @@
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2022 Copyright:
-        <a class="text-dark" href="https://super.fr/"><img class="img-fluid" src="./assets/images/logo-c.png" alt="" style="
-    max-width: 80px;"></a>
+        <a class="text-dark" href="https://super.fr/">super.fr</a>
     </div>
     <!-- Copyright -->
 </footer>
