@@ -7,7 +7,7 @@ include '../inc/navbar.php';
 
 ?>
 
-<div class="container min-vh-100">
+<div class="container  min-vh-100">
     <form class="mb-5 w-50 p-5 m-auto" action="insert-user-action.php" method="post">
         <h3>S'inscrire</h3>
         <div class="mb-3">
@@ -31,7 +31,7 @@ include '../inc/navbar.php';
             <input type="password" class="form-control" id="exampleInputPassword1" name="pass">
         </div>
 
-        <button class='btn btn-dark' type='submit'>Envoyer</button>
+        <button class="btn btn-dark" type='submit'>Envoyer</button>
     </form>
 </div>
 

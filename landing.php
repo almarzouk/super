@@ -11,7 +11,7 @@ else {
 ?>
 
 	<?php include './inc/header.php' ?>
-	<?php include './inc/navbar.php' ?>
+	<?php include 'inc/navbar.php' ?>
 
 	<?php
 	include "inc/connection.php";
@@ -108,7 +108,7 @@ else {
 						$id_objet = $resultat3[$key3]['id_objet'];
 						$quantite = $resultat3[$key3]['quantite'];
 						echo "<div class='col mb-3 '>";
-						echo "<div class='card' style='width:18rem;'>";
+						echo "<div class='card' style='width: 18rem;'>";
 						echo "<img src='assets/images/$category_res/$subcategory_res/$photo.jpg' alt='$photo.jpg' class='img-fluid  border-bottom border'>";
 						echo "<div class='card-body'>";
 						echo "<h5 class='card-title'>";
@@ -217,21 +217,21 @@ else {
 								echo '</a>';
 							}
 							// fin gestion quantité
+
+
 							echo "</div>";
 							echo "</div>";
 							echo "</div>";
 						}
 					}
+
 						?>
 						</div>
 					</div>
 				</div>
+
 			<?php
 		} else {
-
-
-
-
 			echo "<div class='container min-vh-100 text-left mt-5'>";
 			echo "<h3 class ='mb-5'>Module d'administration</h3>";
 			// Affichage de plusieurs modules de gestion du site
@@ -266,7 +266,7 @@ else {
 			echo "<li class = 'mb-3'>" . "<span class='badge rounded-pill text-bg-warning'>" . $requete_count_emprunteurs[0][0]  . "</span> " . " emprunteur$pluriel inscrit$pluriel</li>";
 			echo "<div class = 'd-flex'>";
 			echo "<li class = 'me-3'><a class='btn btn-light' href='admin/insert-user.php'>Ajouter un utilisateur</a></li>";
-			echo "<li><a class='btn btn-danger' href='admin/delete-user.php'>Supprimer un utilisateur</a></li>";
+			echo "<li><a class='btn btn-danger' href='admin/list-user.php'>Supprimer un utilisateur</a></li>";
 			echo "</div>";
 			echo '</ul>';
 			echo '</div>';
@@ -274,55 +274,6 @@ else {
 
 
 			// afficher bouton ajouter supprimer emprunteur
-			/** Gestion Catégorie **/
-			//afficher les catégories + lien ajouter
-			echo '<div class="card text-bg-dark mb-3 mb-5" style="min-width: 33rem; max-width:33rem;">';
-			echo '<div class="card-header">';
-			echo "<h4>Gestion des catégories</h4>";
-			echo '</div>';
-			echo '<div class="card-body">';
-			$requete_count_category = "SELECT COUNT(*) FROM category";
-			$query_count_category = $pdo->query($requete_count_category);
-			$requete_count_category = $query_count_category->fetchAll();
-			if (($requete_count_category[0][0]) > 1) {
-				$pluriel = "s";
-			} else {
-				$pluriel = "";
-			}
-			echo '<ul class = "list-unstyled">';
-			echo "<li class ='mb-4'>" . "<span class='badge rounded-pill text-bg-warning'>" . $requete_count_category[0][0] . "</span> " . " catégorie$pluriel </li>";
-			echo "<div class = 'd-flex'>";
-			echo "<li class ='me-3'><a class='btn btn-light' href='#'>Ajouter une catégorie (non fonctionnel)</a></li>";
-			echo "<li><a class='btn btn-danger' href='emprunts.php'>Supprimer une catégorie (non fonctionnel)</a></li>";
-			echo "</div>";
-			echo '</ul>';
-			echo '</div>';
-			echo '</div>';
-
-			/** Gestion Sous-catégorie **/
-			echo '<div class="card text-bg-dark me-5 mb-5" style="min-width: 33rem; max-width:33rem;">';
-			echo '<div class="card-header">';
-			echo "<h4>Gestion des sous-catégories</h4>";
-			echo '</div>';
-			echo '<div class="card-body">';
-			$requete_count_subcategory = "SELECT COUNT(*) FROM sub_category";
-			$query_count_subcategory = $pdo->query($requete_count_subcategory);
-			$requete_count_subcategory = $query_count_subcategory->fetchAll();
-			if (($requete_count_subcategory[0][0]) > 1) {
-				$pluriel = "s";
-			} else {
-				$pluriel = "";
-			}
-			echo '<ul class = "list-unstyled">';
-			echo "<li class='mb-4'>" . "<span class='badge rounded-pill text-bg-warning'>" . $requete_count_subcategory[0][0] . "</span> "  . " sous-catégorie$pluriel </li>";
-			echo "<div class = 'd-flex'>";
-			echo "<li class ='me-3'><a class='btn btn-light' href='#'>Ajouter une sous-catégorie (non fonctionnel)</a></li>";
-			echo "<li><a class='btn btn-danger' href='emprunts.php'>Supprimer une sous-catégorie (non fonctionnel)</a></li>";
-			echo "</div>";
-			echo '</ul>';
-			echo '</div>';
-			echo '</div>';
-			//afficher les sous-catégories
 			/** Gestion Objets **/
 			echo '<div class="card text-bg-dark mb-5" style="min-width: 33rem; max-width:33rem;">';
 			echo '<div class="card-header">';
@@ -341,8 +292,8 @@ else {
 			echo '<ul class = "list-unstyled">';
 			echo "<li  class='mb-4'>" . "<span class='badge rounded-pill text-bg-warning'>" . $requete_count_objets[0][0] . "</span> "  . " objet$pluriel </li>";
 			echo "<div class = 'd-flex'>";
-			echo "<li class ='me-3'><a class='btn btn-light'  href='admin/insert-objet.php'>Ajouter un objet (manque upload)</a></li>";
-			echo "<li><a class='btn btn-danger' href='delete-objet.php'>Supprimer un objet</a></li>";
+			echo "<li class ='me-3'><a class='btn btn-light'  href='admin/insert-objet.php'>Ajouter un objet</a></li>";
+			echo "<li><a class='btn btn-danger' href='admin/list-objet.php'>Supprimer un objet</a></li>";
 			echo "</div>";
 			echo '</ul>';
 			echo '</div>';
@@ -376,7 +327,7 @@ else {
 				$pluriel = "";
 			}
 			echo "<li class = 'mb-3'>" . "<span class='badge rounded-pill text-bg-warning'>"  . $requete_count_emprunts_clos[0][0] . "</span> " . " emprunt$pluriel clos (en historique) </li>";
-			echo "<li><a class='btn btn-danger'  href='emprunts.php'>Annuler un emprunt</a></li>";
+			echo "<li><a class='btn btn-danger'  href='emprunts.php?option_page=1'>Annuler un emprunt</a></li>";
 			echo '</ul>';
 			echo '</div>';
 			echo '</div>';

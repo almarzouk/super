@@ -1,72 +1,44 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Hôte : 127.0.0.1:3306
--- Généré le : ven. 02 sep. 2022 à 09:21
--- Version du serveur : 8.0.27
--- Version de PHP : 8.0.13
+<?php
+$nombdd="emprunts";
+$servername="localhost";
+$username="root";
+$password="";
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données : `emprunt`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `category`
---
-
-DROP TABLE IF EXISTS `category`;
-CREATE TABLE IF NOT EXISTS `category` (
-  `id_category` int NOT NULL AUTO_INCREMENT,
-  `nom_category` varchar(55) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_category`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `category`
---
-
-INSERT INTO `category` (`id_category`, `nom_category`) VALUES
-(1, 'accessoires'),
-(2, 'lumieres'),
-(3, 'photos_appareils'),
-(4, 'photos_camescope');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `emprunts`
---
-
-DROP TABLE IF EXISTS `emprunts`;
-CREATE TABLE IF NOT EXISTS `emprunts` (
-  `id_emprunt` int NOT NULL AUTO_INCREMENT,
-  `id_emprunteur` int NOT NULL,
-  `id_objet` int NOT NULL,
-  `date_emprunt` date NOT NULL,
-  `date_restitution` date NOT NULL,
-  `encours` int NOT NULL,
-  `date_retour_reel` date NOT NULL,
-  PRIMARY KEY (`id_emprunt`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `emprunts`
---
-
-INSERT INTO `emprunts` (`id_emprunt`, `id_emprunteur`, `id_objet`, `date_emprunt`, `date_restitution`, `encours`, `date_retour_reel`) VALUES
+try{
+	$conn = new PDO("mysql:host=$servername",$username,$password);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	
+	$sql="CREATE DATABASE IF NOT EXISTS $nombdd";
+	$conn->exec($sql);
+	
+	echo "Base de données <b>".$nombdd."</b> a bien été créée!<br/>";
+	}
+	
+catch(PDOException $e)
+{
+	echo "Erreur".$e->getMessage();
+}
+	
+try{
+	$conn = new PDO("mysql:host=$servername;dbname=$nombdd",$username,$password);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	
+	$sql="CREATE TABLE IF NOT EXISTS `category` (
+  `id_category` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `nom_category` varchar(55) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL);
+						
+						INSERT INTO `category` (`id_category`, `nom_category`) VALUES
+						(1, 'accessoires'),
+						(2, 'lumieres'),
+						(3, 'photos_appareils'),
+						(4, 'photos_camescope');
+						
+		CREATE TABLE IF NOT EXISTS `emprunts` (`id_emprunt` int NOT NULL AUTO_INCREMENT,`id_emprunteur` int NOT NULL,
+	`id_objet` int NOT NULL,  `date_emprunt` date NOT NULL,  `date_restitution` date NOT NULL,  `encours` int NOT NULL, `date_retour_reel` date NOT NULL,
+	PRIMARY KEY (`id_emprunt`));
+	
+	
+		INSERT INTO `emprunts` (`id_emprunt`, `id_emprunteur`, `id_objet`, `date_emprunt`, `date_restitution`, `encours`, `date_retour_reel`) VALUES
 (1, 1, 33, '2022-08-31', '2022-09-07', 0, '2022-08-31'),
 (2, 1, 33, '2022-08-31', '2022-09-07', 1, '2022-08-31'),
 (3, 2, 30, '2022-08-12', '2022-08-19', 0, '2022-09-01'),
@@ -82,14 +54,7 @@ INSERT INTO `emprunts` (`id_emprunt`, `id_emprunteur`, `id_objet`, `date_emprunt
 (13, 2, 6, '2022-09-01', '2022-09-08', 0, '2022-09-01'),
 (14, 2, 3, '2022-09-01', '2022-09-08', 0, '2022-09-01');
 
--- --------------------------------------------------------
-
---
--- Structure de la table `objets`
---
-
-DROP TABLE IF EXISTS `objets`;
-CREATE TABLE IF NOT EXISTS `objets` (
+		CREATE TABLE IF NOT EXISTS `objets` (
   `id_objet` int NOT NULL AUTO_INCREMENT,
   `marque_objet` varchar(55) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `model_objet` varchar(55) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -99,11 +64,7 @@ CREATE TABLE IF NOT EXISTS `objets` (
   `id_subcategory` int NOT NULL,
   `quantite` int NOT NULL,
   PRIMARY KEY (`id_objet`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `objets`
---
+);
 
 INSERT INTO `objets` (`id_objet`, `marque_objet`, `model_objet`, `photo_objet`, `description_objet`, `id_category_objet`, `id_subcategory`, `quantite`) VALUES
 (1, 'NIKON', 'objectif nikon zoom 50mm', 'nikon_zoom_50mm', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 1, 1, 2),
@@ -158,23 +119,12 @@ INSERT INTO `objets` (`id_objet`, `marque_objet`, `model_objet`, `photo_objet`, 
 (51, 'sony_nex_vg10', 'sony_nex_vg10', 'sony_nex_vg10', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 4, 11, 1),
 (52, 'sony_nex_vg30', 'sony_nex_vg30', 'sony_nex_vg30', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 4, 11, 1);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `sub_category`
---
-
-DROP TABLE IF EXISTS `sub_category`;
 CREATE TABLE IF NOT EXISTS `sub_category` (
   `id_subcategory` int NOT NULL AUTO_INCREMENT,
   `nom_subcategory` varchar(55) COLLATE utf8_unicode_ci NOT NULL,
   `id_category` int NOT NULL,
   PRIMARY KEY (`id_subcategory`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `sub_category`
---
+);
 
 INSERT INTO `sub_category` (`id_subcategory`, `nom_subcategory`, `id_category`) VALUES
 (1, 'objectifs', 1),
@@ -189,13 +139,6 @@ INSERT INTO `sub_category` (`id_subcategory`, `nom_subcategory`, `id_category`) 
 (10, 'panasonic', 4),
 (11, 'sony', 4);
 
--- --------------------------------------------------------
-
---
--- Structure de la table `users`
---
-
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id_user` int NOT NULL AUTO_INCREMENT,
   `nom_user` varchar(55) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -206,19 +149,39 @@ CREATE TABLE IF NOT EXISTS `users` (
   `auth_user` int NOT NULL,
   `type_user` int NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
-
---
--- Déchargement des données de la table `users`
---
+);
 
 INSERT INTO `users` (`id_user`, `nom_user`, `prenom_user`, `adresse_user`, `mail_user`, `pass_user`, `auth_user`, `type_user`) VALUES
 (1, 'admin', 'admin', 'admin', 'leserpat@hotmail.com', 'pass', 1, 1),
 (2, 'eleve', 'eleve', 'eleve', 'eleve@eleve.com', 'eleve', 0, 0),
 (5, 'grasseau', 'amandine', '4 les marchands 24700 Le pizou', 'amandinegr9@gmail.com', 'amandine', 1, 1),
 (6, 'almarzouk', 'jumaa', '2 lotis la croix lanauve, 16000 Angoulême', 'jumaa.almarzouk@gmail.com', 'jumaa', 1, 1);
-COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+";
+					
+	$conn->exec($sql);
+	
+	echo "Table	<b>Tables de démo créées</b> a bien été créée!<br/>";
+	}
+	
+catch(PDOException $e)
+{
+	echo "Erreur".$e->getMessage();
+	
+}
+
+	
+catch(PDOException $e)
+{
+	echo "Erreur".$e->getMessage();
+	
+}
+
+
+
+header("refresh:5;../index.php");
+
+
+
+	
+?>

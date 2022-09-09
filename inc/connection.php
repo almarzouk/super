@@ -1,10 +1,10 @@
 <?php
 //création du dsn, Data Source Name
 $hote = 'localhost';
-$db = 'emprunt';
+$db = 'emprunts';
 $port = '3306';
 $charset = 'utf8';
-$user = 'jumaa';
+$user = 'root';
 $password = '';
 
 $dsn = "mysql:$hote=localhost;dbname=$db;port=$port;charset=$charset";
@@ -14,7 +14,10 @@ $dsn = "mysql:$hote=localhost;dbname=$db;port=$port;charset=$charset";
 // création et test de la connexion
 try {
 	$pdo = new PDO($dsn, "$user", "$password");
-} catch (PDOException $exception) {
+} catch (PDOException $exception) 
+{
+	// créer la bdd avec import des tables
+	echo "<h3><a href='admin/checkbdd.php'>Créer la Bdd et les tables du projet dans MySQL</a></h3>";
 	// on peut par exemple envoyer un mail mail('monmail@detest','PDOException' $exception -> getMessage());
 	exit('Erreur de connexion à la base de données');
 }
