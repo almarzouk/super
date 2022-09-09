@@ -20,6 +20,7 @@ session_start();
 		else
 		{	    
 		include('../inc/connection.php');
+		include('../inc/functions.php');
 
 		$id = $_GET['id_user'];
 		//echo $id;
@@ -35,7 +36,7 @@ session_start();
         if($statement->execute()) 
             {
                 echo "Suppression de la fiche utilisateur $id correctement effectuée dans la base de données!";
-                header('Refresh: 3; delete-user.php');
+                header("Refresh: 3; $url_standard/admin/list-user.php");
             }
         
             

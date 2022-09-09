@@ -10,7 +10,12 @@
     <link rel="stylesheet" href="../assets/style/style.css">
 
     <style>
+	
+	
+	
         <?php include './assets/style/style.css' ?>
+		
+		
     </style>
     <title>Super</title>
 </head>

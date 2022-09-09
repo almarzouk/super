@@ -14,8 +14,6 @@ else {
 	} else {
 		include 'inc/header.php';
 		include 'inc/navbar.php';
-
-
 ?>
 
 		<div class="container min-vh-100">

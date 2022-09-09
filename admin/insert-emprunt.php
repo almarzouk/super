@@ -68,7 +68,7 @@ else {
 			echo "<p>Votre emprunt de matériel est validé.</p>";
 			echo "<p>Pensez à le restituer sous une semaine</p>";
 			echo "<p>La date de retour prévue est le $date_restit</p>";
-			header("Refresh:$refresh;../send/index.php");
+			header("Refresh:$refresh;../send");
 			// header("Location: new.php?info=ok&id_stag=$id_stag&label_change=green");
 		} else {
 			echo "<p>Insertion non faite dans la BDD.</p>";

@@ -4,10 +4,10 @@ $hote = 'localhost';
 $db = 'emprunt';
 $port = '3306';
 $charset = 'utf8';
-$user = 'jumaa';
+$user = 'root';
 $password = '';
 
-$dsn = "mysql:$hote=localhost;dbname=$db;port=$port;charset=$charset";
+$dsn = "mysql:host=$hote;dbname=$db;port=$port;charset=$charset";
 
 //$dsn='mysql:host=localhost;dbname=stagiaires;port=3306;charset=utf8';
 
