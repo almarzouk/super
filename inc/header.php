@@ -1,4 +1,6 @@
-<?php ?>
+<?php
+include 'functions.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,11 +9,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/style/style.css">
-
-    <style>
-        <?php include './assets/style/style.css' ?>
-    </style>
+    <link rel="stylesheet" href="./inc/style.css">
+	<style>
+	.navbar {
+  background-image: url("<?php echo $url_standard?>/logo-c.png") !important;
+  background-repeat: no-repeat;
+  background-size: 100px;
+  background-position: 100px 14px;
+}
+	</style>
     <title>Super</title>
 </head>
 
